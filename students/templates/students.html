@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>List students</title>
+</head>
+<body>
+    <h2>Список студентов</h2>
+    <a aria-current="page" class="container nav-link d-flex align-items-center gap-2 active" href="/">
+    Главная страница
+</a>
+    <br>
+    <br>
+    {% if students %}
+        {% for student in students %}
+            ID: {{student.id}},
+            Имя: {{student.first_name}},
+            Фамилия: {{student.last_name}},
+            Дата рождения: {{student.birth_date}}
+            <br>
+        {% endfor %}
+    {% else %}
+        <p>В базе данных нет студентов.</p>
+    {% endif %}
+</body>
+</html>

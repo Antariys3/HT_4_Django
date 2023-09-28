@@ -2,6 +2,7 @@ from django.shortcuts import render
 from faker import Faker
 
 from st_app.models import Student
+from st_app.models import Teacher
 
 fake = Faker("ru-RU")
 
@@ -42,3 +43,8 @@ def generate_students(request):
 def students(request):
     list_students = Student.objects.all()
     return render(request, "students.html", context={"students": list_students})
+
+
+def teachers(request):
+    list_teachers = Teacher.objects.all()
+    return render(request, "teachers.html", context={"teachers": list_teachers})

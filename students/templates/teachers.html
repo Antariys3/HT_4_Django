@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>List students</title>
+    <title>List teachers</title>
     <style>
         table {
-            width: 35%;
+            width: 55%;
             border-collapse: collapse;
             margin-top: 20px;
         }
@@ -31,31 +31,33 @@
     </style>
 </head>
 <body>
-<h2>Список студентов</h2>
+<h2>Список учителей</h2>
 <a aria-current="page" class="container nav-link d-flex align-items-center gap-2 active" href="/">
     Главная страница
 </a>
 <br>
 <br>
-{% if students %}
+{% if teachers %}
     <table>
         <tr>
             <th style="width: 5%;">ID</th>
             <th style="width: 10%;">Имя</th>
             <th style="width: 10%;">Фамилия</th>
             <th style="width: 10%;">Дата рождения</th>
+            <th style="width: 20%;">Предмет</th>
         </tr>
-        {% for student in students %}
+        {% for teacher in teachers %}
             <tr>
-                <td>{{ student.id }}</td>
-                <td>{{ student.first_name }}</td>
-                <td>{{ student.last_name }}</td>
-                <td>{{ student.birth_date }}</td>
+                <td>{{ teacher.id }}</td>
+                <td>{{ teacher.first_name }}</td>
+                <td>{{ teacher.last_name }}</td>
+                <td>{{ teacher.birth_date }}</td>
+                <td>{{ teacher.subject }}</td>
             </tr>
         {% endfor %}
     </table>
 {% else %}
-    <p>В базе данных нет студентов.</p>
+    <p>В базе данных нет учителей.</p>
 {% endif %}
 </body>
 </html>

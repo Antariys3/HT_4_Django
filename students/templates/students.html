@@ -8,22 +8,22 @@
     <title>List students</title>
 </head>
 <body>
-    <h2>Список студентов</h2>
-    <a aria-current="page" class="container nav-link d-flex align-items-center gap-2 active" href="/">
+<h2>Список студентов</h2>
+<a aria-current="page" class="container nav-link d-flex align-items-center gap-2 active" href="/">
     Главная страница
 </a>
-    <br>
-    <br>
-    {% if students %}
-        {% for student in students %}
-            ID: {{student.id}},
-            Имя: {{student.first_name}},
-            Фамилия: {{student.last_name}},
-            Дата рождения: {{student.birth_date}}
-            <br>
-        {% endfor %}
-    {% else %}
-        <p>В базе данных нет студентов.</p>
-    {% endif %}
+<br>
+<br>
+{% if students %}
+    {% for student in students %}
+        ID: {{ student.id }},
+        Имя: {{ student.first_name }},
+        Фамилия: {{ student.last_name }},
+        Дата рождения: {{ student.birth_date }}
+        <br>
+    {% endfor %}
+{% else %}
+    <p>В базе данных нет студентов.</p>
+{% endif %}
 </body>
 </html>

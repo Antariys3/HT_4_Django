@@ -1,6 +1,7 @@
+import random
+
 from django.core.management.base import BaseCommand
 from faker import Faker
-import random
 
 from st_app.models import Teacher
 
@@ -21,7 +22,12 @@ ext_word_list = [
     "Физическая культура",
     "Обществознание",
     "Технология",
-    "Русский язык",
+    "Украинский язык",
+    "Экономика",
+    "Психология",
+    "Хореография",
+    "Астрономия",
+    "Этика",
 ]
 
 

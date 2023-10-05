@@ -1,12 +1,14 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from faker import Faker
 
+from st_app.forms import TeacherForm
 from st_app.models import Student
 from st_app.models import Teacher
 
 fake = Faker("ru-RU")
 
 
+# ДЗ 4. Django
 def index(request):
     return render(request, "index.html")
 
@@ -45,6 +47,30 @@ def students(request):
     return render(request, "students.html", context={"students": list_students})
 
 
+# ДЗ 5. Black, GitHub Actions, Django commands
+def teachers_list(request):
+    list_teachers = Teacher.objects.all().order_by("-id")
+    return render(request, "teachers_list.html", context={"teachers": list_teachers})
+
+
+# ДЗ 6. Django Forms
+def teacher_form(request):
+    if request.method == "GET":
+        form = TeacherForm()
+        return render(request, "teachers_form.html", {"form": form})
+    form = TeacherForm(request.POST)
+    if form.is_valid():
+        teacher = Teacher.objects.create(
+            first_name=request.POST["first_name"],
+            last_name=request.POST["last_name"],
+            birth_date=request.POST["birth_date"],
+            subject=request.POST["subject"],
+        )
+        return redirect(teachers)
+
+    return render(request, "teachers_form.html", {"form": form})
+
+
 def teachers(request):
-    list_teachers = Teacher.objects.all()
+    list_teachers = Teacher.objects.all().order_by("-id")
     return render(request, "teachers.html", context={"teachers": list_teachers})

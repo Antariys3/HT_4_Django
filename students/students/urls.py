@@ -25,6 +25,8 @@ from st_app.views import (
     teachers_list,
     teacher_form,
     teachers,
+    group_form,
+    groups,
 )
 
 urlpatterns = [
@@ -34,6 +36,8 @@ urlpatterns = [
     path("students/", students),
     path("generate-students/", generate_students),
     path("teachers_list/", teachers_list),
-    path("teacher_form/", teacher_form),
+    path("teacher/", teacher_form),
     path("teachers/", teachers),
+    path("group/", group_form),
+    path("groups", groups),
 ]

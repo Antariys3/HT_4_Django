@@ -4,6 +4,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 
 from .management.commands.generate_teachers import ext_word_list
+from .models import Teacher
 
 
 class TeacherForm(forms.Form):
@@ -32,7 +33,6 @@ class TeacherForm(forms.Form):
             raise ValidationError("Имя не должно содержать цифры или символы.")
         elif len(first_name) > 20:
             raise ValidationError("Имя не должно быть больше 20 символов.")
-
         return first_name
 
     def clean_last_name(self):
@@ -42,7 +42,6 @@ class TeacherForm(forms.Form):
             raise ValidationError("Фамилия не должна содержать цифры или символы.")
         elif len(last_name) > 20:
             raise ValidationError("Фамилия не должна быть больше 20 символов.")
-
         return last_name
 
     def clean_birth_date(self):
@@ -53,3 +52,33 @@ class TeacherForm(forms.Form):
         if not min_age <= (today - birth_date) <= max_age:
             raise ValidationError("Учитель должен быть в возрасте от 18 до 65 лет.")
         return birth_date
+
+
+class GroupForm(forms.Form):
+    name = forms.CharField(
+        label="Название группы",
+        widget=forms.TextInput(attrs={"class": "form-control"}),
+    )
+    curator = forms.ModelChoiceField(
+        label="Куратор",
+        queryset=Teacher.objects.all(),
+        widget=forms.Select(attrs={"class": "form-control"}),
+    )
+
+    def clean_name(self):
+        name = self.cleaned_data["name"]
+
+        if len(name) > 10:
+            raise forms.ValidationError(
+                "Название группы не должно быть больше 10 символов."
+            )
+        return name
+
+    def clean_curator(self):
+        curator = self.cleaned_data["curator"]
+
+        if len(str(curator)) > 50:
+            raise forms.ValidationError(
+                "Имя куратора не должно быть больше 50 символов."
+            )
+        return curator

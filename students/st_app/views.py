@@ -1,9 +1,8 @@
 from django.shortcuts import render, redirect
 from faker import Faker
 
-from st_app.forms import TeacherForm
-from st_app.models import Student
-from st_app.models import Teacher
+from st_app.forms import TeacherForm, GroupForm
+from st_app.models import Student, Teacher, Group
 
 fake = Faker("ru-RU")
 
@@ -74,3 +73,23 @@ def teacher_form(request):
 def teachers(request):
     list_teachers = Teacher.objects.all().order_by("-id")
     return render(request, "teachers.html", context={"teachers": list_teachers})
+
+
+def group_form(request):
+    if request.method == "GET":
+        form = GroupForm()
+        return render(request, "groups_form.html", {"form": form})
+    form = GroupForm(request.POST)
+    if form.is_valid():
+        group = Group.objects.create(
+            name=request.POST["name"],
+            curator_id=request.POST["curator"],
+        )
+        return redirect(groups)
+
+    return render(request, "groups_form.html", {"form": form})
+
+
+def groups(request):
+    list_groups = Group.objects.all().order_by("-id")
+    return render(request, "groups.html", context={"groups": list_groups})

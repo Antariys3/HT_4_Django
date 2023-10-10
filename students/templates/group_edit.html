@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Редактирование группы</title>
+</head>
+<body>
+<h4>Редактирование группы</h4>
+<a href="{% url 'home' %}">Главная страница</a>
+<br>
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Сохранить изменения">
+    {% if form.instance.pk %}
+        <button type="button" onclick="window.location.href='{% url 'group_delete' pk=form.instance.pk %}'">Удалить</button>
+    {% endif %}
+</form>
+</body>
+</html>

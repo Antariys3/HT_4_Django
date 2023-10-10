@@ -17,29 +17,15 @@
 <body>
 <h1>Главная страница</h1>
 <h3>Студенты</h3>
-<a aria-current="page" class="container nav-link d-flex align-items-center gap-2 active" href="/generate-student">
-    Сгенерировать студента
-</a>
-<a aria-current="page" class="container nav-link d-flex align-items-center gap-2 active"
-   href="/generate-students/?count=10">
-    Сгенерировать 10 студентов
-</a>
-<a aria-current="page" class="container nav-link d-flex align-items-center gap-2 active" href="/students">
-    Список всех студентов
-</a>
+<a href="{% url 'student' %}">Добавить студента</a>
+<a href="{% url 'generate_student' %}">Сгенерировать студента</a>
+<a href="{% url 'generate_students' %}?count=10">Сгенерировать 10 студентов</a>
+<a href="{% url 'students' %}">Список всех студентов</a>
 <h3>Учителя</h3>
-<a aria-current="page" class="container nav-link d-flex align-items-center gap-2 active" href="/teacher">
-    Создание учителя
-</a>
-<a aria-current="page" class="container nav-link d-flex align-items-center gap-2 active" href="/teachers">
-    Список всех учителей
-</a>
+<a href="{% url 'teacher' %}">Добавить учителя</a>
+<a href="{% url 'teachers' %}">Список всех учителей</a>
 <h3>Учебные группы</h3>
-<a aria-current="page" class="container nav-link d-flex align-items-center gap-2 active" href="/group">
-    Создание группы
-</a>
-<a aria-current="page" class="container nav-link d-flex align-items-center gap-2 active" href="/groups">
-    Список всех групп
-</a>
+<a href="{% url 'group' %}">Добавить группу</a>
+<a href="{% url 'groups' %}">Список всех групп</a>
 </body>
 </html>

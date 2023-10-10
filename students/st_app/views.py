@@ -1,6 +1,5 @@
-from django.forms import model_to_dict
+from django.db import transaction
 from django.shortcuts import render, redirect, get_object_or_404
-from django.urls import reverse
 from faker import Faker
 
 from st_app.forms import TeacherForm, GroupForm, StudentForm
@@ -91,7 +90,14 @@ def group_edit(request, pk):
         return render(request, "group_edit.html", {"form": form})
     form = GroupForm(request.POST, instance=group)
     if form.is_valid():
-        form.save()
+        students_to_add = form.cleaned_data["students_to_add"]
+
+        with transaction.atomic():
+            group = form.save(commit=False)
+            form.save_m2m()
+            group.students.set(students_to_add)
+            group.save()
+
         return redirect("groups")
     return render(request, "group_edit.html", {"form": form})
 

@@ -88,6 +88,24 @@ class GroupForm(ModelForm):
             "curator": forms.Select(attrs={"class": "form-control"}),
         }
 
+    students_to_add = forms.ModelMultipleChoiceField(
+        queryset=Student.objects.all(),
+        label="Добавить студента",
+        widget=forms.SelectMultiple(attrs={"class": "form-control"}),
+        required=False,
+    )
+
+    def clean_students_to_add(self):
+        students_to_add = self.cleaned_data["students_to_add"]
+        group = self.instance
+
+        for student in students_to_add:
+            if student.group and student.group != group:
+                raise forms.ValidationError(
+                    f"Студент {student} уже состоит в группе {student.group}."
+                )
+        return students_to_add
+
     def clean_name(self):
         name = self.cleaned_data["name"]
 

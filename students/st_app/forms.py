@@ -89,7 +89,7 @@ class GroupForm(ModelForm):
         }
 
     students_to_add = forms.ModelMultipleChoiceField(
-        queryset=Student.objects.all(),
+        queryset=Student.objects.all().order_by("-id"),
         label="Добавить студента",
         widget=forms.SelectMultiple(attrs={"class": "form-control"}),
         required=False,

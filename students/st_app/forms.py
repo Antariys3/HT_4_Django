@@ -29,20 +29,22 @@ class TeacherForm(ModelForm):
 
     class Meta:
         model = Teacher
-        fields = ['first_name', 'last_name', 'birth_date', 'subject']
+        fields = ["first_name", "last_name", "birth_date", "subject"]
 
         labels = {
-            'first_name': 'Имя преподавателя',
-            'last_name': 'Фамилия преподавателя',
-            'birth_date': 'Дата рождения',
-            'subject': 'Предмет',
+            "first_name": "Имя преподавателя",
+            "last_name": "Фамилия преподавателя",
+            "birth_date": "Дата рождения",
+            "subject": "Предмет",
         }
 
         widgets = {
-            'first_name': forms.TextInput(attrs={'class': 'form-control'}),
-            'last_name': forms.TextInput(attrs={'class': 'form-control'}),
-            'birth_date': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
-            'subject': forms.Select(attrs={'class': 'form-control'}),
+            "first_name": forms.TextInput(attrs={"class": "form-control"}),
+            "last_name": forms.TextInput(attrs={"class": "form-control"}),
+            "birth_date": forms.DateInput(
+                attrs={"class": "form-control", "type": "date"}
+            ),
+            "subject": forms.Select(attrs={"class": "form-control"}),
         }
 
     def clean_first_name(self):
@@ -76,14 +78,14 @@ class TeacherForm(ModelForm):
 class GroupForm(ModelForm):
     class Meta:
         model = Group
-        fields = ['name', 'curator']
+        fields = ["name", "curator"]
         labels = {
-            'name': 'Название группы',
-            'curator': 'Куратор',
+            "name": "Название группы",
+            "curator": "Куратор",
         }
         widgets = {
-            'name': forms.TextInput(attrs={"class": "form-control"}),
-            'curator': forms.Select(attrs={"class": "form-control"}),
+            "name": forms.TextInput(attrs={"class": "form-control"}),
+            "curator": forms.Select(attrs={"class": "form-control"}),
         }
 
     def clean_name(self):
@@ -106,23 +108,24 @@ class GroupForm(ModelForm):
 
 
 class StudentForm(ModelForm):
-
     class Meta:
         model = Student
-        fields = ['first_name', 'last_name', 'birth_date', 'group']
+        fields = ["first_name", "last_name", "birth_date", "group"]
 
         labels = {
-            'first_name': 'Имя студента',
-            'last_name': 'Фамилия студента',
-            'birth_date': 'Дата рождения',
-            'group': 'Группа'
+            "first_name": "Имя студента",
+            "last_name": "Фамилия студента",
+            "birth_date": "Дата рождения",
+            "group": "Группа",
         }
 
         widgets = {
-            'first_name': forms.TextInput(attrs={'class': 'form-control'}),
-            'last_name': forms.TextInput(attrs={'class': 'form-control'}),
-            'birth_date': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
-            'group': forms.Select(attrs={'class': 'form-control'})
+            "first_name": forms.TextInput(attrs={"class": "form-control"}),
+            "last_name": forms.TextInput(attrs={"class": "form-control"}),
+            "birth_date": forms.DateInput(
+                attrs={"class": "form-control", "type": "date"}
+            ),
+            "group": forms.Select(attrs={"class": "form-control"}),
         }
 
     def clean_first_name(self):
@@ -148,7 +151,7 @@ class StudentForm(ModelForm):
         today = date.today()
         min_age = timedelta(days=365 * 18)
         max_age = timedelta(days=365 * 65)
-        birth_date = datetime.strptime(birth_date, '%Y-%m-%d').date()
+        birth_date = datetime.strptime(birth_date, "%Y-%m-%d").date()
         if not min_age <= (today - birth_date) <= max_age:
             raise ValidationError("Студент должен быть в возрасте от 16 лет.")
         return birth_date

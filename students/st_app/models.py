@@ -7,14 +7,14 @@ class Student(models.Model):
     last_name = models.CharField(max_length=20, blank=False)
     birth_date = models.CharField(max_length=15, blank=False)
     group = models.ForeignKey(
-        'Group', on_delete=models.CASCADE, related_name="students", null=True
+        "Group", on_delete=models.CASCADE, related_name="students", null=True
     )
 
     def __str__(self):
         return f"{self.last_name} {self.first_name}"
 
     def get_absolute_url(self):
-        return reverse('student_delete', args=[str(self.id)])
+        return reverse("student_delete", args=[str(self.id)])
 
 
 class Teacher(models.Model):
@@ -27,7 +27,7 @@ class Teacher(models.Model):
         return f"{self.last_name} {self.first_name}"
 
     def get_absolute_url(self):
-        return reverse('teacher_delete', args=[str(self.id)])
+        return reverse("teacher_delete", args=[str(self.id)])
 
 
 class Group(models.Model):
@@ -40,4 +40,4 @@ class Group(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('group_delete', args=[str(self.id)])
+        return reverse("group_delete", args=[str(self.id)])

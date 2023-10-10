@@ -44,7 +44,7 @@ def generate_students(request):
 
 
 def students(request):
-    list_students = Student.objects.all().order_by('-id')
+    list_students = Student.objects.all().order_by("-id")
     return render(request, "students.html", context={"students": list_students})
 
 
@@ -112,16 +112,16 @@ def group_delete(request, pk):
     group = get_object_or_404(Group, pk=pk)
     if request.method == "POST":
         group.delete()
-        return redirect('groups')
-    return render(request, 'group_confirm_delete.html', {'object': group})
+        return redirect("groups")
+    return render(request, "group_confirm_delete.html", {"object": group})
 
 
 def teacher_delete(request, pk):
     teacher = get_object_or_404(Teacher, pk=pk)
-    if request.method == 'POST':
+    if request.method == "POST":
         teacher.delete()
-        return redirect('teachers')
-    return render(request, 'teacher_confirm_delete.html', {'object': teacher})
+        return redirect("teachers")
+    return render(request, "teacher_confirm_delete.html", {"object": teacher})
 
 
 def student_form(request):
@@ -150,7 +150,7 @@ def student_edit(request, pk):
 
 def student_delete(request, pk):
     student = get_object_or_404(Student, pk=pk)
-    if request.method == 'POST':
+    if request.method == "POST":
         student.delete()
-        return redirect('students')
-    return render(request, 'student_confirm_delete.html', {'object': student})
+        return redirect("students")
+    return render(request, "student_confirm_delete.html", {"object": student})

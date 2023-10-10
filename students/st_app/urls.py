@@ -16,7 +16,6 @@ from st_app.views import (
     student_form,
     student_edit,
     student_delete,
-
 )
 
 urlpatterns = [
@@ -30,9 +29,9 @@ urlpatterns = [
     path("groups/", groups, name="groups"),
     path("group/<int:pk>/", group_edit, name="group_edit"),
     path("teacher/<int:pk>/", teacher_edit, name="teacher_edit"),
-    path('teacher/<int:pk>/delete/', teacher_delete, name='teacher_delete'),
-    path('group/<int:pk>/delete/', group_delete, name='group_delete'),
+    path("teacher/<int:pk>/delete/", teacher_delete, name="teacher_delete"),
+    path("group/<int:pk>/delete/", group_delete, name="group_delete"),
     path("student/", student_form, name="student"),
     path("student/<int:pk>/", student_edit, name="student_edit"),
-    path('student/<int:pk>/delete/', student_delete, name='student_delete'),
+    path("student/<int:pk>/delete/", student_delete, name="student_delete"),
 ]

@@ -7,9 +7,7 @@
 </head>
 <body>
 <h4>Создание группы</h4>
-<a aria-current="page" class="container nav-link d-flex align-items-center gap-2 active" href="/">
-    Главная страница
-</a>
+<a href="{% url 'home' %}">Главная страница</a>
 <br>
 <form action="" method="post">
     {% csrf_token %}

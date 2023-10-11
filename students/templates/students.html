@@ -44,13 +44,15 @@
             <th style="width: 10%;">Имя</th>
             <th style="width: 10%;">Фамилия</th>
             <th style="width: 10%;">Дата рождения</th>
+            <th style="width: 5%;">Группа</th>
         </tr>
         {% for student in students %}
             <tr>
-                <td>{{ student.id }}</td>
+                <td><a href="{% url 'student_edit' student.id %}">{{ student.id }}</a></td>
                 <td>{{ student.first_name }}</td>
                 <td>{{ student.last_name }}</td>
                 <td>{{ student.birth_date }}</td>
+                <td>{{ student.group }}</td>
             </tr>
         {% endfor %}
     </table>

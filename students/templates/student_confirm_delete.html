@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Удалить</title>
+</head>
+<body>
+<h3>Вы уверены, что хотите удалить студента "{{object}}"?</h3>
+
+<form method="post" action="{% url 'student_delete' object.id %}">
+    {% csrf_token %}
+    <input type="submit" value="Удалить">
+</form>
+</body>
+</html>

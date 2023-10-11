@@ -1,0 +1,11 @@
+<h4>Редактирование преподавателя</h4>
+<a href="{% url 'home' %}">Главная страница</a>
+<br>
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Сохранить">
+    {% if form.instance.pk %}
+        <button type="button" onclick="window.location.href='{% url 'teacher_delete' pk=form.instance.pk %}'">Удалить</button>
+    {% endif %}
+</form>

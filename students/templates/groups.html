@@ -7,7 +7,7 @@
     <title>List groups</title>
     <style>
         table {
-            width: 55%;
+            width: 40%;
             border-collapse: collapse;
             margin-top: 20px;
         }
@@ -32,9 +32,7 @@
 </head>
 <body>
 <h2>Список групп и их куратора</h2>
-<a aria-current="page" class="container nav-link d-flex align-items-center gap-2 active" href="/">
-    Главная страница
-</a>
+<a href="{% url 'home' %}">Главная страница</a>
 <br>
 <br>
 {% if groups %}
@@ -42,13 +40,20 @@
     <tr>
         <th style="width: 5%;">ID</th>
         <th style="width: 10%;">Название</th>
-        <th style="width: 10%;">Куратор</th>
+        <th style="width: 15%;">Куратор</th>
+        <th style="width: 15%;">Студенты</th>
+
     </tr>
     {% for group in groups %}
     <tr>
         <td>{{ group.id }}</td>
-        <td>{{ group.name }}</td>
-        <td>{{ group.curator }}</td>
+        <td><a href="{% url 'group_edit' group.id %}">{{ group.name }}</a></td>
+        <td><a href="{% url 'teacher_edit' group.curator.id %}">{{ group.curator }}</a></td>
+        <td>
+            {% for student in group.students.all %}
+                <a href="{% url 'student_edit' student.id %}">{{ student.first_name }} {{ student.last_name }}</a><br>
+            {% endfor %}
+        </td>
     </tr>
     {% endfor %}
 </table>

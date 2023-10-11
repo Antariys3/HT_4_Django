@@ -6,6 +6,6 @@
     {{ form.as_p }}
     <input type="submit" value="Сохранить">
     {% if form.instance.pk %}
-        <button type="button" onclick="window.location.href='{% url 'student_delete' pk=form.instance.pk %}'">Удалить</button>
+        <button type="button" onclick="window.location.href='{% url 'teacher_delete' pk=form.instance.pk %}'">Удалить</button>
     {% endif %}
 </form>

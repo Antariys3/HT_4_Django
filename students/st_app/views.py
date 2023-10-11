@@ -14,11 +14,10 @@ def index(request):
 
 
 def generate_student(request):
-    # id, first_name, last_name, birth_date
     Student.objects.create(
         first_name=fake.first_name(),
         last_name=fake.last_name(),
-        birth_date=fake.date(pattern="%d-%m-%Y"),
+        birth_date=fake.date(pattern="%Y-%m-%d"),
     )
     return render(request, "generate_student.html")
 
@@ -37,7 +36,7 @@ def generate_students(request):
             Student.objects.create(
                 first_name=fake.first_name(),
                 last_name=fake.last_name(),
-                birth_date=fake.date(pattern="%d-%m-%Y"),
+                birth_date=fake.date(pattern="%Y-%m-%d"),
             )
         return render(request, "generate_students.html", {"count": count})
 

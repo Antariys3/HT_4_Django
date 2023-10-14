@@ -1,5 +1,6 @@
 from datetime import date, timedelta, datetime
 
+import phonenumbers
 from django import forms
 from django.core.exceptions import ValidationError
 from django.forms import ModelForm
@@ -128,13 +129,14 @@ class GroupForm(ModelForm):
 class StudentForm(ModelForm):
     class Meta:
         model = Student
-        fields = ["first_name", "last_name", "birth_date", "group"]
+        fields = ["first_name", "last_name", "birth_date", "group", "phone"]
 
         labels = {
             "first_name": "Имя студента",
             "last_name": "Фамилия студента",
             "birth_date": "Дата рождения",
             "group": "Группа",
+            "phone": "Телефон",
         }
 
         widgets = {
@@ -167,9 +169,21 @@ class StudentForm(ModelForm):
     def clean_birth_date(self):
         birth_date = self.cleaned_data["birth_date"]
         today = date.today()
-        min_age = timedelta(days=365 * 18)
+        min_age = timedelta(days=365 * 16)
         max_age = timedelta(days=365 * 65)
         birth_date = datetime.strptime(birth_date, "%Y-%m-%d").date()
         if not min_age <= (today - birth_date) <= max_age:
             raise ValidationError("Студент должен быть в возрасте от 16 лет.")
         return birth_date
+
+    def clean_phone(self):
+        phone = self.cleaned_data["phone"]
+        if not phone:
+            raise forms.ValidationError("Поле телефон не может быть пустым")
+        try:
+            parsed = phonenumbers.parse(phone, None)
+        except phonenumbers.NumberParseException as e:
+            raise forms.ValidationError(e.args[0])
+        return phonenumbers.format_number(
+            parsed, phonenumbers.PhoneNumberFormat.INTERNATIONAL
+        )

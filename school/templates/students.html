@@ -7,7 +7,7 @@
     <title>List students</title>
     <style>
         table {
-            width: 35%;
+            width: 50%;
             border-collapse: collapse;
             margin-top: 20px;
         }
@@ -45,6 +45,7 @@
             <th style="width: 10%;">Фамилия</th>
             <th style="width: 10%;">Дата рождения</th>
             <th style="width: 5%;">Группа</th>
+            <th style="width: 15%;">Телефон</th>
         </tr>
         {% for student in students %}
             <tr>
@@ -53,6 +54,7 @@
                 <td>{{ student.last_name }}</td>
                 <td>{{ student.birth_date }}</td>
                 <td>{{ student.group }}</td>
+                <td>{{ student.phone }}</td>
             </tr>
         {% endfor %}
     </table>
